@@ -71,179 +71,181 @@ function e($value) {
     <title>Browse Opportunities | Campus Attachment System</title>
 
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
 
         body {
-            font-family: Arial, sans-serif;
-            background: #f3f6fb;
-            color: #263445;
+            font-family: 'Segoe UI', system-ui, -apple-system, BlinkMacSystemFont, 'Roboto', 'Helvetica Neue', Arial, sans-serif;
+            color: #134e4a;
+            line-height: 1.6;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            background-color: #0f766e;
+            background-image:
+                linear-gradient(rgba(15, 118, 110, 0.72), rgba(15, 118, 110, 0.78)),
+                url('../assets/images/hero.png');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+            background-attachment: fixed;
         }
 
+        /* ---------- HEADER ---------- */
         header {
-            background: #174a83;
+            background: rgba(15, 118, 110, 0.92);
             color: white;
-            padding: 20px 7%;
+            padding: 16px 6%;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
-            gap: 15px;
+            gap: 16px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            backdrop-filter: blur(6px);
         }
-
-        header h2 {
-            font-size: 20px;
-        }
+        header h2 { font-size: 1.35rem; font-weight: 700; letter-spacing: -0.3px; }
 
         .back-link {
-            color: #174a83;
-            background: white;
-            text-decoration: none;
-            padding: 10px 16px;
-            border-radius: 6px;
-            font-weight: bold;
+            background: white; color: #0f766e; padding: 9px 18px;
+            text-decoration: none; border-radius: 8px; font-weight: 600;
+            transition: background 0.25s ease, transform 0.2s ease;
         }
+        .back-link:hover { background: #ccfbf1; transform: translateY(-1px); }
 
+        /* ---------- LAYOUT ---------- */
         .container {
-            max-width: 1100px;
-            margin: 35px auto;
-            padding: 0 20px;
+            width: 100%; max-width: 1100px; margin: 35px auto; padding: 0 20px; flex: 1;
+            animation: fadeUp 0.6s ease backwards;
         }
 
-        .page-heading {
-            margin-bottom: 25px;
-        }
-
+        .page-heading { margin-bottom: 25px; }
         .page-heading h1 {
-            color: #174a83;
-            margin-bottom: 10px;
+            color: #ffffff; font-size: clamp(1.6rem, 3.5vw, 2.1rem); margin-bottom: 8px;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
+        }
+        .page-heading p { color: rgba(255, 255, 255, 0.92); text-shadow: 0 1px 6px rgba(0, 0, 0, 0.2); }
+
+        /* ---------- GLASS CARDS ---------- */
+        .search-box, .opportunity-card, .no-results {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 14px;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.6);
+            backdrop-filter: blur(8px);
         }
 
-        .page-heading p {
-            color: #68778a;
-        }
+        /* ---------- SEARCH ---------- */
+        .search-box { padding: 22px; margin-bottom: 30px; }
 
-        .search-box {
-            background: white;
-            padding: 22px;
-            border-radius: 10px;
-            margin-bottom: 30px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
-        }
-
-        .search-form {
-            display: grid;
-            grid-template-columns: 1fr 1fr auto;
-            gap: 12px;
-        }
+        .search-form { display: grid; grid-template-columns: 1fr 1fr auto; gap: 12px; }
 
         .search-form input {
-            width: 100%;
-            padding: 12px;
-            border: 1px solid #ccd5e0;
-            border-radius: 6px;
-            font-size: 14px;
+            width: 100%; padding: 12px; border: 1px solid #b7d9d5;
+            border-radius: 8px; font-family: inherit; font-size: 14px;
+            color: #134e4a; background: white;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease;
+        }
+        .search-form input:focus {
+            outline: none; border-color: #0f766e; box-shadow: 0 0 0 3px rgba(15, 118, 110, 0.18);
         }
 
         .search-form button {
-            background: #174a83;
-            color: white;
-            border: none;
-            padding: 12px 22px;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: bold;
+            background: #0f766e; color: white; border: none; padding: 12px 24px;
+            border-radius: 8px; cursor: pointer; font-weight: 600; font-family: inherit;
+            font-size: 14px; transition: background 0.25s ease, transform 0.2s ease;
         }
-
-        .search-form button:hover {
-            background: #10365f;
-        }
+        .search-form button:hover { background: #0d9488; transform: translateY(-1px); }
 
         .clear-link {
-            display: inline-block;
-            margin-top: 12px;
-            color: #174a83;
-            text-decoration: none;
-            font-size: 14px;
+            display: inline-block; margin-top: 12px; color: #0f766e;
+            text-decoration: none; font-size: 14px; font-weight: 600;
         }
+        .clear-link:hover { text-decoration: underline; }
 
         .results-heading {
-            margin-bottom: 18px;
-            color: #174a83;
+            margin-bottom: 18px; color: #ffffff; font-size: 1.3rem;
+            text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
         }
 
+        /* ---------- OPPORTUNITY CARDS ---------- */
         .opportunity-card {
-            background: white;
-            padding: 25px;
-            border-radius: 10px;
-            margin-bottom: 20px;
-            box-shadow: 0 3px 15px rgba(0,0,0,0.05);
+            padding: 25px; margin-bottom: 20px;
+            transition: transform 0.25s ease, box-shadow 0.25s ease;
         }
+        .opportunity-card:hover { transform: translateY(-3px); box-shadow: 0 14px 30px rgba(0, 0, 0, 0.2); }
 
-        .opportunity-card h2 {
-            color: #174a83;
-            margin-bottom: 12px;
-        }
-
-        .organization {
-            font-weight: bold;
-            margin-bottom: 12px;
-        }
-
-        .opportunity-card p {
-            line-height: 1.6;
-            margin-bottom: 12px;
-        }
+        .opportunity-card h2 { color: #0f766e; margin-bottom: 12px; }
+        .organization { font-weight: bold; color: #134e4a; margin-bottom: 12px; }
+        .opportunity-card p { line-height: 1.6; margin-bottom: 12px; }
 
         .details {
-            background: #f3f6fb;
-            padding: 14px;
-            border-radius: 7px;
-            margin-top: 15px;
+            background: #f0fdfa; padding: 14px; border-radius: 8px; margin-top: 15px;
+            border-left: 4px solid #0f766e;
         }
+        .details p { margin-bottom: 7px; }
+        .details p:last-child { margin-bottom: 0; }
 
-        .details p {
-            margin-bottom: 7px;
+        .btn {
+            display: inline-block; background: #0f766e; color: white;
+            padding: 12px 22px; text-decoration: none; border-radius: 8px;
+            font-weight: 600; font-size: 14px;
+            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.2);
+            transition: background 0.25s ease, transform 0.2s ease;
         }
+        .btn:hover { background: #0d9488; transform: translateY(-1px); }
 
-        .details p:last-child {
-            margin-bottom: 0;
-        }
+        .no-results { padding: 30px; text-align: center; color: #475569; }
+        .no-results h3 { color: #0f766e; margin-bottom: 8px; }
 
-        .no-results {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            text-align: center;
-            color: #68778a;
-        }
-
+        /* ---------- FOOTER ---------- */
         footer {
-            text-align: center;
-            padding: 25px;
-            color: #68778a;
-            font-size: 13px;
+            text-align: center; padding: 26px 20px;
+            color: rgba(255, 255, 255, 0.85); font-size: 0.9rem;
+            background: rgba(15, 118, 110, 0.85);
+            backdrop-filter: blur(6px);
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(20px); }
         }
 
         @media (max-width: 650px) {
-            .search-form {
-                grid-template-columns: 1fr;
-            }
+            header { padding: 14px 5%; }
+            header h2 { font-size: 1.15rem; }
+            .search-form { grid-template-columns: 1fr; }
+        }
+
+                /* ---------- HEADER NAVIGATION ---------- */
+        .nav-links { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+        .nav-links a {
+            color: white; text-decoration: none; font-size: 0.95rem; font-weight: 500;
+            padding: 8px 14px; border-radius: 8px;
+            transition: background 0.25s ease, transform 0.2s ease;
+        }
+        .nav-links a:hover { background: rgba(255, 255, 255, 0.18); transform: translateY(-1px); }
+        .nav-links a.active { background: rgba(255, 255, 255, 0.22); font-weight: 600; }
+        .nav-links a.logout { background: white; color: #0f766e; font-weight: 600; }
+        .nav-links a.logout:hover { background: #ccfbf1; }
+
+        @media (max-width: 640px) {
+            header { flex-direction: column; align-items: flex-start; }
         }
     </style>
 </head>
 
 <body>
 
+<?php $current = basename($_SERVER['PHP_SELF']); ?>
 <header>
     <h2>Campus Attachment Management System</h2>
 
-    <a class="back-link" href="dashboard.php">
-        Back to Dashboard
-    </a>
+    <nav class="nav-links">
+        <a href="dashboard.php" class="<?= $current === 'dashboard.php' ? 'active' : '' ?>">Dashboard</a>
+        <a href="opportunities.php" class="<?= in_array($current, ['opportunities.php', 'apply.php']) ? 'active' : '' ?>">Browse Opportunities</a>
+        <a href="my_applications.php" class="<?= $current === 'my_applications.php' ? 'active' : '' ?>">My Applications</a>
+        <a href="profile.php" class="<?= $current === 'profile.php' ? 'active' : '' ?>">Profile</a>
+        <a class="logout" href="../authentication/logout.php">Logout</a>
+    </nav>
 </header>
 
 <div class="container">
@@ -343,13 +345,13 @@ function e($value) {
                     </p>
 
                 </div>
-            <div style="margin-top: 20px;">
-    <a href="apply.php?id=<?php echo (int)$opportunity['opportunity_id']; ?>"
-       style="display:inline-block; background:#174a83; color:white; padding:12px 22px;
-              text-decoration:none; border-radius:6px; font-weight:bold;">
-        Apply Now
-    </a>
-</div>
+
+                <div style="margin-top: 20px;">
+                    <a class="btn" href="apply.php?id=<?php echo (int)$opportunity['opportunity_id']; ?>">
+                        Apply Now
+                    </a>
+                </div>
+
             </article>
 
         <?php endforeach; ?>
